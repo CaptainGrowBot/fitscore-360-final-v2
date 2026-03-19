@@ -198,7 +198,7 @@ export const analyzeFit = async (input: FullAnalysisInput): Promise<FitAnalysis>
 
 export const generateContentMatrix = async (strategy: AuthorityStrategy, summary: string, gaps: string[], jobDesc?: string, previousTopics: string[] = []): Promise<ContentMatrixResult> => {
   const ai = getAi();
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-1.5-flash";
   
   const previousContext = previousTopics.length > 0 ? `Avoid these previously generated topics: ${previousTopics.join(', ')}.` : '';
 
@@ -259,7 +259,7 @@ export const generateContentMatrix = async (strategy: AuthorityStrategy, summary
 
 export const generateAuthorityPost = async (topic: string, strategy: AuthorityStrategy, summary: string, resumeText: string, gaps: string[], jobDesc?: string): Promise<Partial<AuthorityPost>> => {
   const ai = getAi();
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-1.5-flash";
   
   const prompt = `## ROLE
   You are a Senior PM Brand Strategist. Write a high-credibility, "Global Industry Authority" LinkedIn post for a PM professional.
@@ -301,7 +301,7 @@ export const generateAuthorityPost = async (topic: string, strategy: AuthoritySt
 
 export const generateEngagementScripts = async (niche: string): Promise<EngagementScript[]> => {
   const ai = getAi();
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-1.5-flash";
   const prompt = `Generate 5 high-authority PM-focused networking engagement scripts for LinkedIn in the "${niche}" space.
   Ground everything in PM outcomes (Stakeholder buy-in, project velocity, resource optimization).
   
@@ -330,7 +330,7 @@ export const generateEngagementScripts = async (niche: string): Promise<Engageme
 
 export const generateMasterProfile = async (currentJob: string, history: AnalysisHistoryItem[], resume: ResumeInput): Promise<{ headline: string, about: string, banner: string }> => {
   const ai = getAi();
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-1.5-flash";
   
   const historyContext = history.map(h => `- ${h.analysis.jobTitle} at ${h.analysis.company}`).join('\n');
   const resumeText = resume.text || "No resume text provided.";
@@ -373,7 +373,7 @@ export const generateMasterProfile = async (currentJob: string, history: Analysi
 
 export const generateInterviewStrategies = async (resume: ResumeInput, jobDesc: string): Promise<InterviewQuestion[]> => {
   const ai = getAi();
-  const model = "gemini-3-pro-preview";
+  const model = "gemini-1.5-flash";
   const resumeParts = [];
   if (resume.file) resumeParts.push({ inlineData: resume.file });
   else if (resume.text) resumeParts.push({ text: `Resume: ${resume.text}` });
@@ -421,7 +421,7 @@ export const generateRejectionBridge = async (resume: ResumeInput, jobTitle: str
   const prompt = `As an Expert PM Career Strategist, draft a gracious PM-focused response to a rejection notice for ${jobTitle} at ${companyName}. Mention ongoing growth in project leadership. Signature from resume.`;
 
   const response = await ai.models.generateContent({ 
-    model: "gemini-3-flash-preview", 
+    model: "gemini-1.5-flash", 
     contents: [{ parts: [{ text: prompt }, ...resumeParts] }] 
   });
   return response.text || "";
@@ -436,7 +436,7 @@ export const generateThankYouBridge = async (resume: ResumeInput, jobTitle: stri
   const prompt = `As an Expert PM Career Strategist, draft a post-interview thank you email for ${jobTitle} at ${companyName}. Reiterate value in project lifecycle management. Signature from resume.`;
 
   const response = await ai.models.generateContent({ 
-    model: "gemini-3-flash-preview", 
+    model: "gemini-1.5-flash", 
     contents: [{ parts: [{ text: prompt }, ...resumeParts] }] 
   });
   return response.text || "";
@@ -444,7 +444,7 @@ export const generateThankYouBridge = async (resume: ResumeInput, jobTitle: stri
 
 export const generateDocuments = async (resume: ResumeInput, jobDesc: string): Promise<GeneratedDocs> => {
   const ai = getAi();
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-1.5-flash";
   const resumeParts: any[] = [];
   if (resume.file) resumeParts.push({ inlineData: resume.file });
   else if (resume.text) resumeParts.push({ text: `Source Resume Content: ${resume.text}` });
@@ -545,7 +545,7 @@ export const generateResumeFromBuilder = async (data: BuilderData): Promise<stri
   ${JSON.stringify(data, null, 2)}`;
 
   const response = await ai.models.generateContent({ 
-    model: "gemini-3-flash-preview", 
+    model: "gemini-1.5-flash", 
     contents: [{ parts: [{ text: prompt }] }] 
   });
   return response.text || "";
