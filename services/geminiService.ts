@@ -2,7 +2,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { FitAnalysis, GeneratedDocs, ResumeInput, BuilderData, FullAnalysisInput, InterviewQuestion, AnalysisHistoryItem, ContentMatrixDay, AuthorityPost, EngagementScript, AuthorityStrategy, ContentMatrixResult } from "../types";
 
-const getAi = () => new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 const analysisSchema = {
   type: Type.OBJECT,
