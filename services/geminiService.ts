@@ -125,7 +125,7 @@ const analysisSchema = {
 
 export const analyzeFit = async (input: FullAnalysisInput): Promise<FitAnalysis> => {
   const ai = getAi();
-  const model = "gemini-3-pro-preview";
+  const model = "gemini-1.5-flash";
   const parts: any[] = [];
   
   const systemInstruction = `
